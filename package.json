@@ -1,0 +1,23 @@
+{
+    "name": "fuel-state-manager",
+    "version": "0.0.1",
+    "description": "Manages custom pushState, replaceState, and popstates.",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Pageworks/fuel-state-manager.git"
+    },
+    "keywords": [
+      "pushState"
+    ],
+    "author": "Kyle Andrews",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/Pageworks/fuel-state-manager/issues"
+    },
+    "homepage": "https://github.com/Pageworks/fuel-state-manager#readme"
+  }
+  
