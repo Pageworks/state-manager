@@ -1,6 +1,6 @@
 {
   "name": "fuel-state-manager",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Manages custom pushState, replaceState, and popstates.",
   "keywords": [
     "pushstate",
