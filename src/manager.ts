@@ -4,8 +4,9 @@ import Manager from './global';
 
 export default class StateManager{
 
-    private _doInitialPushState: boolean;
-    private _isDebug:            boolean;
+    private _doInitialPushState:    boolean;
+    private _isDebug:               boolean;
+    private _previousState:         Manager.IStateObject;
 
     constructor(debug?:boolean, initialpushState?:boolean){
         this._doInitialPushState = (initialpushState) ? initialpushState : false;
@@ -55,6 +56,7 @@ export default class StateManager{
                 y: window.scrollY
             }
         };
+        this._previousState = stateObject;
         stateObject.title = (pageTitle !== null && pageTitle !== undefined) ? pageTitle : document.title;
 
         // Handle the state type
@@ -63,6 +65,23 @@ export default class StateManager{
         }else{
             this.handleReplaceState(stateObject);
         }
+    }
+
+    /**
+     * Updates the URI of the state object without updating the scroll position
+     * @param pageURI - the new URI of the page
+     */
+    private buildUpdateObject(pageURI:string){
+        const stateObject:Manager.IStateObject = {
+            uri: pageURI,
+            timestamp: getTimestamp(),
+            history: false,
+            scrollPos: {
+                x: this._previousState.scrollPos.x,
+                y: this._previousState.scrollPos.y
+            }
+        };
+        this.handleReplaceState(stateObject);
     }
 
     /**
@@ -83,5 +102,13 @@ export default class StateManager{
      */
     public doReplace(uri:string, title?:string): void{
         this.buildStateObject(uri, false, title);
+    }
+
+    /**
+     * Called when a `window.history.replaceState()` is needed but the scroll position shouldn't be updated.
+     * @param uri - the new URI of the page
+     */
+    public doUpdate(uri:string){
+        this.buildUpdateObject(uri);
     }
 }

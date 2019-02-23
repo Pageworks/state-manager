@@ -31,6 +31,7 @@ var StateManager = (function () {
                 y: window.scrollY
             }
         };
+        this._previousState = stateObject;
         stateObject.title = (pageTitle !== null && pageTitle !== undefined) ? pageTitle : document.title;
         if (isPushstate) {
             this.handlePushState(stateObject);
@@ -39,11 +40,26 @@ var StateManager = (function () {
             this.handleReplaceState(stateObject);
         }
     };
+    StateManager.prototype.buildUpdateObject = function (pageURI) {
+        var stateObject = {
+            uri: pageURI,
+            timestamp: timestamp_1.default(),
+            history: false,
+            scrollPos: {
+                x: this._previousState.scrollPos.x,
+                y: this._previousState.scrollPos.y
+            }
+        };
+        this.handleReplaceState(stateObject);
+    };
     StateManager.prototype.doPush = function (uri, title) {
         this.buildStateObject(uri, true, title);
     };
     StateManager.prototype.doReplace = function (uri, title) {
         this.buildStateObject(uri, false, title);
+    };
+    StateManager.prototype.doUpdate = function (uri) {
+        this.buildUpdateObject(uri);
     };
     return StateManager;
 }());
