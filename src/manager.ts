@@ -46,14 +46,14 @@ export default class StateManager{
      * @param isPushstate - the new document title
      * @param pageTitle - the current scroll position of the page
      */
-    private buildStateObject(pageURI:string, isPushstate:boolean, pageTitle:string): void{
+    private buildStateObject(pageURI:string, isPushstate:boolean, pageTitle:string, scrollOffset:Manager.IScrollPosition): void{
         const stateObject:Manager.IStateObject = {
             uri: pageURI,
             timestamp: getTimestamp(),
             history: isPushstate,
             scrollPos: {
-                x: window.scrollX,
-                y: window.scrollY
+                x: (window.scrollX + scrollOffset.x),
+                y: (window.scrollY + scrollOffset.y)
             }
         };
         this._previousState = stateObject;
@@ -73,8 +73,8 @@ export default class StateManager{
      * @param title - the new document title
      * @param scrollPosition - the current scroll position of the page
      */
-    public doPush(uri:string, title:string = document.title): void{
-        this.buildStateObject(uri, true, title);
+    public doPush(uri:string, title:string = document.title, scrollOffset:Manager.IScrollPosition = {x:0,y:0}): void{
+        this.buildStateObject(uri, true, title, scrollOffset);
     }
 
     /**
@@ -83,7 +83,7 @@ export default class StateManager{
      * @param title - the new document title
      * @param scrollPosition - the current scroll position of the page
      */
-    public doReplace(uri:string, title:string = document.title): void{
-        this.buildStateObject(uri, false, title);
+    public doReplace(uri:string, title:string = document.title, scrollOffset:Manager.IScrollPosition = {x:0,y:0}): void{
+        this.buildStateObject(uri, false, title, scrollOffset);
     }
 }

@@ -5,7 +5,7 @@ export as namespace StateManager;
 declare class StateManager{
     constructor(debug?:boolean, initialpushState?:boolean);
     public doPush(uri:string, title?:string):void;
-    public doReplace(uri:string, title?:string):void;
+    public doReplace(uri:string, title?:string, scrollOffset?:StateManager.IScrollPosition):void;
 }
 
 

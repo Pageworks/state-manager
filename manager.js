@@ -21,14 +21,14 @@ var StateManager = (function () {
         }
         window.history.pushState(stateObject, stateObject.title, stateObject.uri);
     };
-    StateManager.prototype.buildStateObject = function (pageURI, isPushstate, pageTitle) {
+    StateManager.prototype.buildStateObject = function (pageURI, isPushstate, pageTitle, scrollOffset) {
         var stateObject = {
             uri: pageURI,
             timestamp: timestamp_1.default(),
             history: isPushstate,
             scrollPos: {
-                x: window.scrollX,
-                y: window.scrollY
+                x: (window.scrollX + scrollOffset.x),
+                y: (window.scrollY + scrollOffset.y)
             }
         };
         this._previousState = stateObject;
@@ -40,13 +40,15 @@ var StateManager = (function () {
             this.handleReplaceState(stateObject);
         }
     };
-    StateManager.prototype.doPush = function (uri, title) {
+    StateManager.prototype.doPush = function (uri, title, scrollOffset) {
         if (title === void 0) { title = document.title; }
-        this.buildStateObject(uri, true, title);
+        if (scrollOffset === void 0) { scrollOffset = { x: 0, y: 0 }; }
+        this.buildStateObject(uri, true, title, scrollOffset);
     };
-    StateManager.prototype.doReplace = function (uri, title) {
+    StateManager.prototype.doReplace = function (uri, title, scrollOffset) {
         if (title === void 0) { title = document.title; }
-        this.buildStateObject(uri, false, title);
+        if (scrollOffset === void 0) { scrollOffset = { x: 0, y: 0 }; }
+        this.buildStateObject(uri, false, title, scrollOffset);
     };
     return StateManager;
 }());
