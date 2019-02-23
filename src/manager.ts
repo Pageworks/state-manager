@@ -14,7 +14,7 @@ export default class StateManager{
         
         // Check if the initial page state needs to be pushed into history
         if(this._doInitialPushState){
-            this.doPush(window.location.href, document.title);
+            this.doReplace(window.location.href);
         }
     }
 

@@ -6,7 +6,7 @@ var StateManager = (function () {
         this._doInitialPushState = (initialpushState) ? initialpushState : false;
         this._isDebug = (debug) ? debug : false;
         if (this._doInitialPushState) {
-            this.doPush(window.location.href, document.title);
+            this.doReplace(window.location.href);
         }
     }
     StateManager.prototype.handleReplaceState = function (stateObject) {
