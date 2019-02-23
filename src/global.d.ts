@@ -6,7 +6,6 @@ declare class StateManager{
     constructor(debug?:boolean, initialpushState?:boolean);
     public doPush(uri:string, title?:string):void;
     public doReplace(uri:string, title?:string):void;
-    public doUpdate(uri:string):void;
 }
 
 

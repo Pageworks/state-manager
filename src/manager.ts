@@ -46,7 +46,7 @@ export default class StateManager{
      * @param isPushstate - the new document title
      * @param pageTitle - the current scroll position of the page
      */
-    private buildStateObject(pageURI:string, isPushstate:boolean, pageTitle?:string): void{
+    private buildStateObject(pageURI:string, isPushstate:boolean, pageTitle:string): void{
         const stateObject:Manager.IStateObject = {
             uri: pageURI,
             timestamp: getTimestamp(),
@@ -68,29 +68,12 @@ export default class StateManager{
     }
 
     /**
-     * Updates the URI of the state object without updating the scroll position
-     * @param pageURI - the new URI of the page
-     */
-    private buildUpdateObject(pageURI:string){
-        const stateObject:Manager.IStateObject = {
-            uri: pageURI,
-            timestamp: getTimestamp(),
-            history: false,
-            scrollPos: {
-                x: this._previousState.scrollPos.x,
-                y: this._previousState.scrollPos.y
-            }
-        };
-        this.handleReplaceState(stateObject);
-    }
-
-    /**
      * Called when a new `window.history.pushState()` needs to occur.
      * @param uri - the new URI of the page
      * @param title - the new document title
      * @param scrollPosition - the current scroll position of the page
      */
-    public doPush(uri:string, title?:string): void{
+    public doPush(uri:string, title:string = document.title): void{
         this.buildStateObject(uri, true, title);
     }
 
@@ -100,15 +83,7 @@ export default class StateManager{
      * @param title - the new document title
      * @param scrollPosition - the current scroll position of the page
      */
-    public doReplace(uri:string, title?:string): void{
+    public doReplace(uri:string, title:string = document.title): void{
         this.buildStateObject(uri, false, title);
-    }
-
-    /**
-     * Called when a `window.history.replaceState()` is needed but the scroll position shouldn't be updated.
-     * @param uri - the new URI of the page
-     */
-    public doUpdate(uri:string){
-        this.buildUpdateObject(uri);
     }
 }

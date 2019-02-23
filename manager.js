@@ -40,26 +40,13 @@ var StateManager = (function () {
             this.handleReplaceState(stateObject);
         }
     };
-    StateManager.prototype.buildUpdateObject = function (pageURI) {
-        var stateObject = {
-            uri: pageURI,
-            timestamp: timestamp_1.default(),
-            history: false,
-            scrollPos: {
-                x: this._previousState.scrollPos.x,
-                y: this._previousState.scrollPos.y
-            }
-        };
-        this.handleReplaceState(stateObject);
-    };
     StateManager.prototype.doPush = function (uri, title) {
+        if (title === void 0) { title = document.title; }
         this.buildStateObject(uri, true, title);
     };
     StateManager.prototype.doReplace = function (uri, title) {
+        if (title === void 0) { title = document.title; }
         this.buildStateObject(uri, false, title);
-    };
-    StateManager.prototype.doUpdate = function (uri) {
-        this.buildUpdateObject(uri);
     };
     return StateManager;
 }());
