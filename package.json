@@ -1,23 +1,43 @@
 {
-    "name": "fuel-state-manager",
-    "version": "0.0.1",
-    "description": "Manages custom pushState, replaceState, and popstates.",
-    "main": "index.js",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/Pageworks/fuel-state-manager.git"
-    },
-    "keywords": [
-      "pushState"
-    ],
-    "author": "Kyle Andrews",
-    "license": "MIT",
-    "bugs": {
-      "url": "https://github.com/Pageworks/fuel-state-manager/issues"
-    },
-    "homepage": "https://github.com/Pageworks/fuel-state-manager#readme"
+  "name": "fuel-state-manager",
+  "version": "0.0.1",
+  "description": "Manages custom pushState, replaceState, and popstates.",
+  "keywords": [
+    "pushstate",
+    "navigation",
+    "popstate"
+  ],
+  "main": "manager.js",
+  "types": "./src/global.d.ts",
+  "files": [
+    "src",
+    "lib",
+    "manager.js",
+    "manager.js.map"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit"
+    }
+  },
+  "scripts": {
+    "precommit": "tslint -c .tslintrc.js -p tsconfig.json -t verbose",
+    "compile": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pageworks/fuel-state-manager.git"
+  },
+  "author": "Kyle Andrews",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pageworks/fuel-state-manager/issues"
+  },
+  "devDependencies": {
+    "husky": "^1.3.1",
+    "tslint": "^5.12.1",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.3.3333"
   }
-  
+}
