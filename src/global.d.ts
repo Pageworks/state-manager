@@ -4,8 +4,8 @@ export as namespace StateManager;
 
 declare class StateManager{
     constructor(debug?:boolean, initialpushState?:boolean);
-    public doPush:      Function;
-    public doReplace:   Function;
+    public doPush(uri:string, title?:string):void;
+    public doReplace(uri:string, title?:string):void;
 }
 
 declare namespace StateManager{
