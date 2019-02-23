@@ -1,5 +1,7 @@
 import getTimestamp from './lib/util/timestamp';
 
+import Manager from './global';
+
 export default class StateManager{
 
     private _doInitialPushState: boolean;
@@ -19,7 +21,7 @@ export default class StateManager{
      * Replaces the current `StateObject` in the windows history.
      * @param stateObject - the new`StateObject`
      */
-    private handleReplaceState(stateObject:StateObject): void{
+    private handleReplaceState(stateObject:Manager.IStateObject): void{
         if(this._isDebug){
             console.log('Replacing History State: ', stateObject);
         }
@@ -30,7 +32,7 @@ export default class StateManager{
      * Pushes the `StateObject` into the windows history.
      * @param stateObject - `StateObject` that will be pushed into the windows history
      */
-    private handlePushState(stateObject:StateObject): void{
+    private handlePushState(stateObject:Manager.IStateObject): void{
         if(this._isDebug){
             console.log('Pushing History State: ', stateObject);
         }
@@ -44,7 +46,7 @@ export default class StateManager{
      * @param pageTitle - the current scroll position of the page
      */
     private buildStateObject(pageURI:string, isPushstate:boolean, pageTitle?:string): void{
-        const stateObject:StateObject = {
+        const stateObject:Manager.IStateObject = {
             uri: pageURI,
             timestamp: getTimestamp(),
             history: isPushstate,
