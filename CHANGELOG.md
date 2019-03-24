@@ -1,5 +1,11 @@
 # 1.0.1 - 2019-03-24
 
+### Fixes
+
+- Fixes: updates `global.d.ts` to declare the public methods as static public methods
+
+# 1.0.1 - 2019-03-24
+
 ### Adds
 
 - Adds: readme
