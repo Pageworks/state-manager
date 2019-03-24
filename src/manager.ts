@@ -5,16 +5,15 @@ import Manager from './global';
 export default class StateManager{
 
     private _doInitialPushState:    boolean;
-    private _isDebug:               boolean;
-    private _previousState:         Manager.IStateObject;
+    private static _isDebug:        boolean;
 
     constructor(debug?:boolean, initialpushState?:boolean){
         this._doInitialPushState = (initialpushState) ? initialpushState : false;
-        this._isDebug            = (debug) ? debug : false;
+        StateManager._isDebug    = (debug) ? debug : false;
         
         // Check if the initial page state needs to be pushed into history
         if(this._doInitialPushState){
-            this.doReplace(window.location.href);
+            StateManager.doReplace(window.location.href);
         }
     }
 
@@ -22,8 +21,8 @@ export default class StateManager{
      * Replaces the current `StateObject` in the windows history.
      * @param stateObject - the new`StateObject`
      */
-    private handleReplaceState(stateObject:Manager.IStateObject): void{
-        if(this._isDebug){
+    private static handleReplaceState(stateObject:Manager.IStateObject): void{
+        if(StateManager._isDebug){
             console.log('Replacing History State: ', stateObject);
         }
         window.history.replaceState(stateObject, stateObject.title, stateObject.uri);
@@ -33,8 +32,8 @@ export default class StateManager{
      * Pushes the `StateObject` into the windows history.
      * @param stateObject - `StateObject` that will be pushed into the windows history
      */
-    private handlePushState(stateObject:Manager.IStateObject): void{
-        if(this._isDebug){
+    private static handlePushState(stateObject:Manager.IStateObject): void{
+        if(StateManager._isDebug){
             console.log('Pushing History State: ', stateObject);
         }
         window.history.pushState(stateObject, stateObject.title, stateObject.uri);
@@ -46,7 +45,7 @@ export default class StateManager{
      * @param isPushstate - the new document title
      * @param pageTitle - the current scroll position of the page
      */
-    private buildStateObject(pageURI:string, isPushstate:boolean, pageTitle:string, scrollOffset:Manager.IScrollPosition): void{
+    private static buildStateObject(pageURI:string, isPushstate:boolean, pageTitle:string, scrollOffset:Manager.IScrollPosition): void{
         const stateObject:Manager.IStateObject = {
             uri: pageURI,
             timestamp: getTimestamp(),
@@ -56,14 +55,13 @@ export default class StateManager{
                 y: (window.scrollY + scrollOffset.y)
             }
         };
-        this._previousState = stateObject;
         stateObject.title = (pageTitle !== null && pageTitle !== undefined) ? pageTitle : document.title;
 
         // Handle the state type
         if(isPushstate){
-            this.handlePushState(stateObject);
+            StateManager.handlePushState(stateObject);
         }else{
-            this.handleReplaceState(stateObject);
+            StateManager.handleReplaceState(stateObject);
         }
     }
 
@@ -73,8 +71,8 @@ export default class StateManager{
      * @param title - the new document title
      * @param scrollPosition - the current scroll position of the page
      */
-    public doPush(uri:string, title:string = document.title, scrollOffset:Manager.IScrollPosition = {x:0,y:0}): void{
-        this.buildStateObject(uri, true, title, scrollOffset);
+    public static doPush(uri:string, title:string = document.title, scrollOffset:Manager.IScrollPosition = {x:0,y:0}): void{
+        StateManager.buildStateObject(uri, true, title, scrollOffset);
     }
 
     /**
@@ -83,7 +81,7 @@ export default class StateManager{
      * @param title - the new document title
      * @param scrollPosition - the current scroll position of the page
      */
-    public doReplace(uri:string, title:string = document.title, scrollOffset:Manager.IScrollPosition = {x:0,y:0}): void{
-        this.buildStateObject(uri, false, title, scrollOffset);
+    public static doReplace(uri:string, title:string = document.title, scrollOffset:Manager.IScrollPosition = {x:0,y:0}): void{
+        StateManager.buildStateObject(uri, false, title, scrollOffset);
     }
 }
