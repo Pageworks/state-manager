@@ -1,5 +1,5 @@
 {
-  "name": "fuel-state-manager",
+  "name": "@codewithkyle/state-manager",
   "version": "1.0.2",
   "description": "Manages custom pushState, replaceState, and popstates.",
   "keywords": [
@@ -29,12 +29,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pageworks/fuel-state-manager.git"
+    "url": "git+https://github.com/codewithkyle/state-manager.git"
   },
-  "author": "Kyle Andrews",
+  "author": "Kyle Andrews <andrewskyle28@gmail.com> (http://codewithkyle.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Pageworks/fuel-state-manager/issues"
+    "url": "https://github.com/codewithkyle/state-manager/issues"
   },
   "devDependencies": {
     "http-server": "^0.11.1",
