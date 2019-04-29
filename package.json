@@ -1,5 +1,5 @@
 {
-  "name": "@codewithkyle/state-manager",
+  "name": "@pageworks/state-manager",
   "version": "1.0.2",
   "description": "Manages custom pushState, replaceState, and popstates.",
   "keywords": [
@@ -7,6 +7,15 @@
     "navigation",
     "popstate"
   ],
+  "author": "Pageworks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pageworks/state-manager/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pageworks/state-manager.git"
+  },
   "main": "manager.js",
   "types": "./src/global.d.ts",
   "files": [
@@ -26,15 +35,6 @@
     "bundle": "webpack",
     "demo": "http-server ./docs -o",
     "test": "npm run compile && npm run bundle && npm run demo"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/codewithkyle/state-manager.git"
-  },
-  "author": "Kyle Andrews <andrewskyle28@gmail.com> (http://codewithkyle.com/)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/codewithkyle/state-manager/issues"
   },
   "devDependencies": {
     "http-server": "^0.11.1",
